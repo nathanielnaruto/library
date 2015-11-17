@@ -5,28 +5,59 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.*; 
+import java.awt.FlowLayout;
 
-public class MainGui extends JFrame implements ActionListener {
+public class MainGui extends JFrame {
 	public MainGui() {
 		super("Library Management System");
 		try {
 			setSize(400, 300);
 			setLocationRelativeTo(null);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setLayout(new FlowLayout(FlowLayout.LEFT, 10, 20));
 
-			JButton ok = new JButton("ok");
-			ok.setBackground(new Color(128,100,100));
-			ok.addActionListener(this);
+			JButton loginbut = new JButton("login");
+			JButton borrowbut = new JButton("borrow");
+			JButton returnbut = new JButton("return");
+			
+			loginbut.addActionListener(new LoginListener() {
+					public void actionPerformed(ActionEvent e) {
+						setVisible(false);
+						new LoginGui();
+						//setVisible(true);
+					}
+				});
+			borrowbut.addActionListener(new BorrowListener() {
+					public void actionPerformed(ActionEvent e) {
+						new BorrowGui();
+					}
+				});
+			returnbut.addActionListener(new ReturnListener() {
+					public void actionPerformed(ActionEvent e) {
+						new ReturnGui();
+					}
+				});
 
-			add(ok);
+			add(borrowbut);
+			add(loginbut);
+			add(returnbut);
 			setVisible(true);
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
-	public void actionPerformed(ActionEvent e) {
-		setVisible(false);
-		LoginGui login = new LoginGui();
+	class LoginListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			setVisible(false);
+			new LoginGui();
+			//setVisible(true);
+		}
 	}
+	class BorrowListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			new BorrowGui();
+		}
+	}
+	class ReturnListener implements ActionListener
 }

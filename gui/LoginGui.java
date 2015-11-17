@@ -4,16 +4,19 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.*;
 
-public class LoginGui extends JFrame {
+public class LoginGui{
 	public LoginGui() {
 		try {
-			super("Administration Login");
-			setBackground(new Color(255, 0, 0));
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setVisible(true);
+			loginWindow.setTitle("Adminitrator Login");
+			loginWindow.setLocationRelativeTo(null);
+			loginWindow.setBackground(new Color(0, 0, 255));
+			loginWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			loginWindow.setSize(800, 700);
+			loginWindow.setVisible(true);
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
+	private static JFrame loginWindow = new JFrame();
 }
