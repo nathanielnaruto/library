@@ -20,23 +20,9 @@ public class MainGui extends JFrame {
 			JButton borrowbut = new JButton("borrow");
 			JButton returnbut = new JButton("return");
 			
-			loginbut.addActionListener(new LoginListener() {
-					public void actionPerformed(ActionEvent e) {
-						setVisible(false);
-						new LoginGui();
-						//setVisible(true);
-					}
-				});
-			borrowbut.addActionListener(new BorrowListener() {
-					public void actionPerformed(ActionEvent e) {
-						new BorrowGui();
-					}
-				});
-			returnbut.addActionListener(new ReturnListener() {
-					public void actionPerformed(ActionEvent e) {
-						new ReturnGui();
-					}
-				});
+			loginbut.addActionListener(new LoginListener());
+			borrowbut.addActionListener(new BorrowListener());
+			returnbut.addActionListener(new ReturnListener());
 
 			add(borrowbut);
 			add(loginbut);
@@ -50,14 +36,34 @@ public class MainGui extends JFrame {
 	class LoginListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			setVisible(false);
-			new LoginGui();
-			//setVisible(true);
+			LoginGui loginwnd = new LoginGui();
+			loginwnd.setAutoRecover(new WindowAdapter() {
+					public void windowClosing(WindowEvent e) {
+						setVisible(true);		
+					}
+				});
 		}
 	}
 	class BorrowListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			new BorrowGui();
+			setVisible(false);
+			BorrowGui borrowwnd = new BorrowGui();
+			borrowwnd.setAutoRecover(new WindowAdapter() {
+					public void windowClosing(WindowEvent e) {
+						setVisible(true);		
+					}
+				});
 		}
 	}
-	class ReturnListener implements ActionListener
+	class ReturnListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			setVisible(false);
+			ReturnGui returnwnd = new ReturnGui();
+			returnwnd.setAutoRecover(new WindowAdapter() {
+					public void windowClosing(WindowEvent e) {
+						setVisible(true);		
+					}
+				});
+		}
+	}
 }

@@ -3,20 +3,24 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.*;
+import java.awt.event.*;
 
-public class BorrowGui{
+public class BorrowGui {
 	public BorrowGui() {
 		try {
-			borrowWindow.setTitle("Borrow");
-			borrowWindow.setLocationRelativeTo(null);
-			borrowWindow.setBackground(new Color(0, 0, 255));
-			borrowWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			borrowWindow.setSize(800, 700);
-			borrowWindow.setVisible(true);
+			borrowwnd.setTitle("Borrow");
+			borrowwnd.setBackground(new Color(0, 0, 255));
+			borrowwnd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			borrowwnd.setSize(800, 700);
+			borrowwnd.setLocationRelativeTo(null);
+			borrowwnd.setVisible(true);
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
-	private static JFrame borrowWindow = new JFrame();
+	public void setAutoRecover(WindowListener wl) {
+		borrowwnd.addWindowListener(wl);
+	}
+	private static JFrame borrowwnd = new JFrame();
 }
