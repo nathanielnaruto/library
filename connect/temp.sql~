@@ -1,0 +1,8 @@
+
+create table borrow (
+		cno char(7),
+		bno char(8),
+		borrow_date date,
+		return_date date,
+		hno char(7));
+
