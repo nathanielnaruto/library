@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 
 public class Connect2DB {
-	public static void makeConnection() throws SQLException, ClassNotFoundException {
+	public static void Connect2DB() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 		String url = "jdbc:mysql://localhost/library";
 		String user = "library";
@@ -14,10 +14,16 @@ public class Connect2DB {
 		connection = DriverManager.getConnection(
 						url, user, pass);
 	}
-	public static Connection getConnection() {
+	
+	public Connection getConnection() {
 		//return the connection to the user
 		return connection;
 	}
-	private static Connection connection;
+	
+	public void closeConnection() {
+		connection.close();
+	}
+	
+	private Connection connection;
 }
 

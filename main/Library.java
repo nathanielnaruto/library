@@ -1,6 +1,7 @@
 package main;
 
 import gui.MainGui;
+import query.ManageDB;
 
 
 public class Library {
@@ -12,6 +13,7 @@ public class Library {
 			ex.printStackTrace();
 		}
 	}
+
 }
 		
 

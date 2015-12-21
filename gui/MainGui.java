@@ -8,14 +8,16 @@ public class MainGui extends JFrame {
 	public MainGui() {
 		super("图书管理系统");
 		try {
-			setSize(400, 300);
+			setSize(400, 250);
 			setLocationRelativeTo(null);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setLayout(new BorderLayout());
 			
 			String[] allType = {"书号","类别", "书名", "出版社", "年份", "作者"};
-			JComboBox chooseType = new JComboBox(allType);
+			JComboBox<String> chooseType = new JComboBox<>(allType);
 
+//			FlowLayout centerFlow = new FlowLayout();
+//			centerFlow.setAlignment(FlowLayout.TRAILING);
 			
 			JPanel searchPanel = new JPanel();
 			searchPanel.add(chooseType);
@@ -23,15 +25,19 @@ public class MainGui extends JFrame {
 			searchPanel.add(new JButton("搜索"));
 
 			JButton loginBut = new JButton("管理员登陆");
-			JButton borrowBut = new JButton("借还");
-			
 			loginBut.addActionListener(new LoginListener());
-			borrowBut.addActionListener(new BorrowListener());
+			JPanel optionPanel = new JPanel(new FlowLayout());
+			optionPanel.add(loginBut);
 			
-			JPanel optionPanel = new JPanel(new BorderLayout());
-			optionPanel.add(loginBut, BorderLayout.EAST);
-			optionPanel.add(borrowBut, BorderLayout.WEST);
-
+			
+			
+			JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			JLabel titleLabel = new JLabel("欢迎使用图书管理系统");
+			titleLabel.setFont(new java.awt.Font("Dialog", 1, 25));
+			titlePanel.add(titleLabel);
+			
+			
+			add(titlePanel, BorderLayout.NORTH);
 			add(searchPanel, BorderLayout.CENTER);
 			add(optionPanel, BorderLayout.SOUTH);
 
@@ -43,25 +49,25 @@ public class MainGui extends JFrame {
 	}
 	class LoginListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			setVisible(false);
+			MainGui.this.dispose();
 			LoginGui loginwnd = new LoginGui();
-			loginwnd.setAutoRecover(new WindowAdapter() {
+			loginwnd.addWindowListener(new WindowAdapter() {
 					public void windowClosing(WindowEvent e) {
-						setVisible(true);		
+						new MainGui();	
 					}
 				});
 		}
 	}
-	class BorrowListener implements ActionListener {
+/*	class BorrowListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			setVisible(false);
+			dispose();
 			BorrowGui borrowwnd = new BorrowGui();
-			borrowwnd.setAutoRecover(new WindowAdapter() {
+			borrowwnd.addWindowListener(new WindowAdapter() {
 					public void windowClosing(WindowEvent e) {
-						setVisible(true);		
+						new MainGui();
 					}
 				});
 		}
 	}
-	
+*/
 }
